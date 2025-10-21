@@ -2,14 +2,15 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import taskRoutes from "./routes/tasks.js";
-
+import dotnev from "dotenv";
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+dotnev.config();
 
 mongoose
-  .connect("mongodb://localhost:27017/bugtrackr", {
+  .connect(process.env.MONGO_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
