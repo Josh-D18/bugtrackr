@@ -18,15 +18,18 @@ function App() {
 
   const handleAdd = async (e) => {
     e.preventDefault();
-    await addTask(title);
-    setTitle("");
-    loadTasks();
+
+    if (title.length > 0) {
+      await addTask(title);
+      setTitle("");
+      loadTasks();
+    }
   };
 
   // BUG 5: Deleting doesn’t always update UI properly
   const handleDelete = async (id) => {
     await deleteTask(id);
-    setTasks(tasks.filter((task) => task.id !== id));
+    setTasks(() => [...tasks.filter((task) => task._id !== id)]);
   };
 
   return (
